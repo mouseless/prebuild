@@ -8,7 +8,7 @@ In order to use this in your project, you should import `./index.js` use and
 use the'run()' function;
 
 ```java
-  prebuild.run([your-config-path], { customTasks: tasks });
+  async run([your-config-path], customTasks = {} );
 ```
 
 The functions reads your configuration from the provided `.yml` file and
@@ -16,8 +16,8 @@ asyncrounusly runs the tasks with given configurations.
 
 ## Setup
 
- We suggest you use to add this as a submodule to your repository and follow 
- folder structure.
+We suggest you use to add this as a submodule to your repository and follow 
+folder structure.
 
 ```
   +-- prebuild
@@ -27,6 +27,12 @@ asyncrounusly runs the tasks with given configurations.
   |   +-- customTask.js
   +-- config.yml
 ```
+
+> :information_source:
+> The project requiers `YAML` package.
+> ```json
+> "yaml": "^2.2.1"
+> ```
 
 ## Built-in Tasks
 
