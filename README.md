@@ -1,8 +1,11 @@
 # Prebuild
 
-This project is a task based mechanism which enables you to run tasks, enabling custom functionality in prebuild stage. It is designed as a submodule to use in various projects.
+This project is a task based mechanism which enables you to run tasks, enabling
+custom functionality in prebuild stage. It is designed as a submodule to use 
+in various projects.
 
-In order to use this in your project, you should import `./index.js` use and use the'run()' function;
+In order to use this in your project, you should import `./index.js` use and 
+use the'run()' function;
 
 ```java
   prebuild.run([your-config-path], { customTasks: tasks });
@@ -13,7 +16,8 @@ asyncrounusly runs the tasks with given configurations.
 
 ## Setup
 
- We suggest you use to add this as a submodule to your repository and follow folder structure.
+ We suggest you use to add this as a submodule to your repository and follow 
+ folder structure.
 
 ```
   +-- prebuild
