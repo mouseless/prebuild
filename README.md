@@ -7,7 +7,7 @@ in various projects.
 In order to use this in your project, you should import `./index.js` use and 
 use the'run()' function;
 
-```java
+```javascript
   async run([your-config-path], customTasks = {} );
 ```
 
@@ -29,7 +29,9 @@ folder structure.
 ```
 
 > :information_source:
+>
 > The project requiers `YAML` package.
+> 
 > ```json
 > "yaml": "^2.2.1"
 > ```

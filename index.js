@@ -7,7 +7,6 @@ import * as log from "./tasks/utils/log.js";
 
 /**
  * Runs tasks configured in .yml file
- * 
  *
  * @async
  * @param {String} configPath Path of the prebuild configuration file
@@ -23,10 +22,10 @@ export async function run(configPath, customTasks = {}) {
 
   process.chdir(join(scriptDir, config.projectRoot));
   Object.assign(log.settings, config.log);
-  
-  const tasks = {...builtInTasks, ...customTasks };
 
-  for(const task of config.tasks) {
+  const tasks = { ...builtInTasks, ...customTasks };
+
+  for (const task of config.tasks) {
     const [name] = Object.keys(task);
     const parameters = task[name];
 
