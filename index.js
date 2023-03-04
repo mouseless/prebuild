@@ -14,7 +14,9 @@ import * as log from "./tasks/utils/log.js";
  *
  * @returns {Promise}
  */
-export async function run(configPath, { customTasks = {} }) {
+export async function run(configPath,
+  { customTasks } = { customTasks: {} }
+) {
   process.setMaxListeners(0);
 
   const configDir = dirname(configPath);
