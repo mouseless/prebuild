@@ -18,8 +18,9 @@ export async function run(configPath, customTasks = {}) {
 
   const scriptDir = dirname(configPath);
   const config = YAML.parse(readFileSync(configPath, "utf8"));
+  const rootDirectory = join(scriptDir, config.projectRoot);
 
-  process.chdir(join(scriptDir, config.projectRoot));
+  process.chdir(rootDirectory);
   Object.assign(log.settings, config.log);
 
   const tasks = { ...builtInTasks, ...customTasks };
