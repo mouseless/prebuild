@@ -20,12 +20,12 @@ We suggest you use to add this as a submodule to your repository and follow
 folder structure.
 
 ```
-  +-- prebuild
-  |   +-- .prebuild-submodule
-  |   +-- index.js
-  +-- tasks
-  |   +-- customTask.js
-  +-- config.yml
+prebuild/
+├─ .prebuild => git submodule
+├─ tasks/
+│  ├─ customTask.js
+├─ config.yml
+├─ index.js
 ```
 
 > :warning:
