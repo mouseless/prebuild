@@ -1,6 +1,5 @@
 import { readFileSync } from "fs";
 import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 import YAML from "yaml";
 import * as builtInTasks from "./tasks/index.js";
 import * as log from "./tasks/utils/log.js";
@@ -10,17 +9,21 @@ import * as log from "./tasks/utils/log.js";
  *
  * @async
  * @param {String} configPath Path of the prebuild configuration file
- * @param {Module} customTasks Custom module for user defined tasks
+ * @param {Module} options Run options parameter
+ * @param {Module} options.customTasks Custom module for user defined tasks
  *
  * @returns {Promise}
  */
-export async function run(configPath, customTasks = {}) {
+export async function run(configPath,
+  { customTasks } = { customTasks: {} }
+) {
   process.setMaxListeners(0);
 
-  const scriptDir = dirname(fileURLToPath(import.meta.url));
+  const configDir = dirname(configPath);
   const config = YAML.parse(readFileSync(configPath, "utf8"));
+  const projectRoot = join(configDir, config.projectRoot);
 
-  process.chdir(join(scriptDir, config.projectRoot));
+  process.chdir(projectRoot);
   Object.assign(log.settings, config.log);
 
   const tasks = { ...builtInTasks, ...customTasks };

@@ -1,17 +1,17 @@
 # Prebuild
 
-This project is a task based mechanism which enables you to run tasks, enabling
-custom functionality in prebuild stage. It is designed as a submodule to use 
-in various projects.
+This project is a task based mechanism which enables you to run tasks, 
+providing custom functionality in prebuild stage. It is designed as a submodule
+to use in various projects.
 
 In order to use this in your project, you should import `./index.js` use and 
-use the'run()' function;
+use the `run()` function;
 
 ```javascript
-  async run([your-config-path], customTasks = {} );
+await run("path/to/your/config.yml", { customTasks });
 ```
 
-The functions reads your configuration from the provided `.yml` file and
+The function reads your configuration from the provided `.yml` file and
 asyncrounusly runs the tasks with given configurations.
 
 ## Setup
@@ -20,21 +20,72 @@ We suggest you use to add this as a submodule to your repository and follow
 folder structure.
 
 ```
-  +-- prebuild
-  |   +-- .prebuild-submodule
-  |   +-- index.js
-  +-- tasks
-  |   +-- customTask.js
-  +-- config.yml
+prebuild/
+├─ .prebuild => git submodule
+├─ tasks/
+│  ├─ customTask.js
+├─ config.yml
+├─ index.js
 ```
 
-> :information_source:
+> :warning:
 >
-> The project requiers `YAML` package.
+> The project requires `YAML` package. Make sure you include this package in
+> your `package.json`.
 > 
 > ```json
 > "yaml": "^2.2.1"
 > ```
+
+## Sample Configuration
+
+Below is sample configuration which you can copy and use. Before you run your
+app, make sure you correctly change the _projectRoot_ value accordingly.
+
+```yaml
+# Project root relative to this config file
+# This is required
+projectRoot: ../../
+
+# Log settings
+log:
+  debug: false # Enable debug logs
+  quiet: false # Disable logs completely
+
+# Tasks run in given order, you can change the order according to your needs
+tasks:
+  - clean:
+      directories:
+        - ./.theme/.temp
+        - ./.theme/.output
+  - copy:
+      extension: .png # optional
+      source: ./
+      target: ./.theme/.public
+  
+  - extractDiagrams:
+      source: ./
+      target: ./.theme/.temp
+
+  - move:
+      extension: .png # optional
+      source: ./.theme/.temp
+      target: ./.theme/.public
+
+  - rename:
+      source: ./.theme/.temp
+      find: README.md
+      replace: index.md
+
+  - replaceContent:
+      extension: .md
+      source: ./.theme/.temp
+      oldText: README.md
+      newText: index.md
+
+  - touch:
+      path: ./.theme/.env.local
+```
 
 ## Built-in Tasks
 
