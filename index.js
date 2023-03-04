@@ -9,18 +9,19 @@ import * as log from "./tasks/utils/log.js";
  *
  * @async
  * @param {String} configPath Path of the prebuild configuration file
- * @param {Module} customTasks Custom module for user defined tasks
+ * @param {Module} options Run options parameter
+ * @param {Module} options.customTasks Custom module for user defined tasks
  *
  * @returns {Promise}
  */
-export async function run(configPath, customTasks = {}) {
+export async function run(configPath, { customTasks = {} }) {
   process.setMaxListeners(0);
 
-  const scriptDir = dirname(configPath);
+  const configDir = dirname(configPath);
   const config = YAML.parse(readFileSync(configPath, "utf8"));
-  const rootDirectory = join(scriptDir, config.projectRoot);
+  const projectRoot = join(configDir, config.projectRoot);
 
-  process.chdir(rootDirectory);
+  process.chdir(projectRoot);
   Object.assign(log.settings, config.log);
 
   const tasks = { ...builtInTasks, ...customTasks };
