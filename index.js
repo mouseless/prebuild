@@ -1,6 +1,5 @@
 import { readFileSync } from "fs";
 import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 import YAML from "yaml";
 import * as builtInTasks from "./tasks/index.js";
 import * as log from "./tasks/utils/log.js";
@@ -17,7 +16,7 @@ import * as log from "./tasks/utils/log.js";
 export async function run(configPath, customTasks = {}) {
   process.setMaxListeners(0);
 
-  const scriptDir = dirname(fileURLToPath(import.meta.url));
+  const scriptDir = dirname(configPath);
   const config = YAML.parse(readFileSync(configPath, "utf8"));
 
   process.chdir(join(scriptDir, config.projectRoot));
