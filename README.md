@@ -66,6 +66,16 @@ tasks:
   - extractDiagrams:
       source: ./
       target: ./.theme/.temp
+      config: 
+        backgroundColor: '#000000'
+        theme: base
+        themeVariables:
+          primaryColor: '#FA465B'
+          primaryTextColor: '#fff'
+          primaryBorderColor': '#7C0000'
+          lineColor: '#F8B229'
+          secondaryColor: '#006100'
+          tertiaryColor: '#fff'
 
   - move:
       extension: .png # optional
