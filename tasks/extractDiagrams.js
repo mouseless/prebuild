@@ -16,7 +16,7 @@ import files from "./utils/files.js";
  *
  * @returns {Promise}
  */
-export default async function({ source, target, theme }) {
+export default async function({ source, target, config }) {
   log.info(`Extracting diagrams from markdown files in '${source}' to '${target}'`);
 
   await files(source, ".md", async (dir, file) => {
@@ -34,15 +34,8 @@ export default async function({ source, target, theme }) {
       parseMMDOptions: {
         viewport: { width: 1280, height: 720, },
         mermaidConfig: { 
-          theme: "base",
-          themeVariables: {
-            'primaryColor': '#BB2528',
-            'primaryTextColor': '#fff',
-            'primaryBorderColor': '#7C0000',
-            'lineColor': '#F8B229',
-            'secondaryColor': '#006100',
-            'tertiaryColor': '#fff'
-          }
+          theme: config?.theme || "default",
+          themeVariables: config?.themeVariables || {}
          }
       },
     });
