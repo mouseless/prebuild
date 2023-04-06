@@ -67,6 +67,7 @@ tasks:
       source: ./
       target: ./.theme/.temp
       config: 
+        background: '#fff'
         theme : base
         themeVariables:
           primaryColor: '#BB2528'
