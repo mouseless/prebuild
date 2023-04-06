@@ -33,9 +33,10 @@ export default async function({ source, target, config }) {
       outputFormat: "png",
       parseMMDOptions: {
         viewport: { width: 1280, height: 720, },
+        background: config?.background || "#fff",
         mermaidConfig: { 
           theme: config?.theme || "default",
-          themeVariables: config?.themeVariables || {}
+          themeVariables: config?.themeVariables || []
          }
       },
     });
