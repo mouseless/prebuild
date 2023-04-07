@@ -42,7 +42,7 @@ export default async function({ source, target, config }) {
     });
 
     const diagrams = readdirSync(targetDir)
-      .filter(f => f.startsWith(fileName) && f.endsWith(`.${config?.outputFormat||"png"}`))
+      .filter(f => f.startsWith(fileName) && f.endsWith(`.${config?.outputFormat || "png"}`))
       .map(diagram => `'${join(targetDir, diagram)}'`);
 
     diagrams.forEach(diagram => log.debug(`${sourceFile} => ${diagram}`, 1));
