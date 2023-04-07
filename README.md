@@ -66,6 +66,8 @@ tasks:
   - extractDiagrams:
       source: ./
       target: ./.theme/.temp
+      outputFormat: 'svg'
+      deviceScaleFactor: 1
       config: 
         backgroundColor: '#000000'
         theme: base

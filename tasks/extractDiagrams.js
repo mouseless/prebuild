@@ -30,9 +30,9 @@ export default async function({ source, target, config }) {
     await run(sourceFile, targetFile, {
       puppeteerConfig: { "executablePath" : process.env.CHROMIUM_EXECUTABLE_PATH },
       quiet: log.settings.quiet || !log.settings.debug,
-      outputFormat: "png",
+      outputFormat: config?.outputFormat || "png",
       parseMMDOptions: {
-        viewport: { width: 1280, height: 720, },
+        viewport: { width: 1280, height: 720, deviceScaleFactor: config?.deviceScaleFactor || 1 },
         backgroundColor: config?.backgroundColor || "#fff",
         mermaidConfig: { 
           theme: config?.theme || "default",
@@ -42,7 +42,7 @@ export default async function({ source, target, config }) {
     });
 
     const diagrams = readdirSync(targetDir)
-      .filter(f => f.startsWith(fileName) && f.endsWith(".png"))
+      .filter(f => f.startsWith(fileName) && f.endsWith(`.${config?.outputFormat || "png"}`))
       .map(diagram => `'${join(targetDir, diagram)}'`);
 
     diagrams.forEach(diagram => log.debug(`${sourceFile} => ${diagram}`, 1));
