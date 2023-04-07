@@ -32,7 +32,7 @@ export default async function({ source, target, config }) {
       quiet: log.settings.quiet || !log.settings.debug,
       outputFormat: config?.outputFormat || "png",
       parseMMDOptions: {
-        viewport: { width: config?.width ||1280, height: config?.height || 720, deviceScaleFactor: config?.deviceScaleFactor || 1 },
+        viewport: { width: 1280, height: 720, deviceScaleFactor: config?.deviceScaleFactor || 1 },
         backgroundColor: config?.backgroundColor || "#fff",
         mermaidConfig: { 
           theme: config?.theme || "default",
