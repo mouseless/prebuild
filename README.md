@@ -1,10 +1,10 @@
 # Prebuild
 
-This project is a task based mechanism which enables you to run tasks, 
+This project is a task based mechanism which enables you to run tasks,
 providing custom functionality in prebuild stage. It is designed as a submodule
 to use in various projects.
 
-In order to use this in your project, you should import `./index.js` use and 
+In order to use this in your project, you should import `./index.js` use and
 use the `run()` function;
 
 ```javascript
@@ -16,7 +16,7 @@ asyncrounusly runs the tasks with given configurations.
 
 ## Setup
 
-We suggest you use to add this as a submodule to your repository and follow 
+We suggest you use to add this as a submodule to your repository and follow
 folder structure.
 
 ```
@@ -32,7 +32,7 @@ prebuild/
 >
 > The project requires `YAML` package. Make sure you include this package in
 > your `package.json`.
-> 
+>
 > ```json
 > "yaml": "^2.2.1"
 > ```
@@ -62,14 +62,14 @@ tasks:
       extension: .png # optional
       source: ./
       target: ./.theme/.public
-  
+
   - extractDiagrams:
       source: ./
       target: ./.theme/.temp
-      outputFormat: 'svg'
-      deviceScaleFactor: 1
-      config: 
+      config:
         backgroundColor: '#000000'
+        outputFormat: 'svg'
+        deviceScaleFactor: 1
         theme: base
         themeVariables:
           primaryColor: '#FA465B'
