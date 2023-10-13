@@ -28,13 +28,16 @@ export default async function({ source, target, config }) {
     mkdirSync(targetDir, { recursive: true });
 
     await run(sourceFile, targetFile, {
-      puppeteerConfig: { "executablePath" : process.env.CHROMIUM_EXECUTABLE_PATH },
+      puppeteerConfig: {
+        "executablePath" : process.env.CHROMIUM_EXECUTABLE_PATH,
+        headless : config?.headless
+      },
       quiet: log.settings.quiet || !log.settings.debug,
       outputFormat: config?.outputFormat || "png",
       parseMMDOptions: {
         viewport: { width: 1280, height: 720, deviceScaleFactor: config?.deviceScaleFactor || 1 },
         backgroundColor: config?.backgroundColor || "#fff",
-        mermaidConfig: { 
+        mermaidConfig: {
           theme: config?.theme || "default",
           themeVariables: config?.themeVariables || []
          }
