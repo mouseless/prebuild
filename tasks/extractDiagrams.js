@@ -61,7 +61,7 @@ export default async function({ source, target, config }) {
           sequence,
           journey,
           timeline,
-          $class,
+          class: $class,
           pie,
           state,
           er,
