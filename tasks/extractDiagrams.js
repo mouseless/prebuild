@@ -24,6 +24,29 @@ export default async function({ source, target, config }) {
     const targetDir = join(target, dir);
     const targetFile = join(target, dir, file);
     const fileName = parse(file).name;
+    /*
+    * These diagram types are taken from the schema in
+    * https://mermaid.js.org/config/schema-docs/config.html
+    */
+    const {
+      flowchart,
+      gantt,
+      sequence,
+      journey,
+      timeline,
+      $class,
+      pie,
+      state,
+      er,
+      quadrantChart,
+      xyChart,
+      requirement,
+      mindmap,
+      gitGraph,
+      c4,
+      sankey,
+      block
+    } = config;
 
     mkdirSync(targetDir, { recursive: true });
 
@@ -38,9 +61,26 @@ export default async function({ source, target, config }) {
         viewport: { width: 1280, height: 720, deviceScaleFactor: config?.deviceScaleFactor || 1 },
         backgroundColor: config?.backgroundColor || "#fff",
         mermaidConfig: {
+          flowchart,
+          gantt,
+          sequence,
+          journey,
+          timeline,
+          class: $class,
+          pie,
+          state,
+          er,
+          quadrantChart,
+          xyChart,
+          requirement,
+          mindmap,
+          gitGraph,
+          c4,
+          sankey,
+          block,
           theme: config?.theme || "default",
           themeVariables: config?.themeVariables || []
-         }
+        }
       },
     });
 
