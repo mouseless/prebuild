@@ -41,7 +41,8 @@ export default async function({ source, target, config }) {
       gitGraph,
       c4,
       sankey,
-      block } = config;
+      block
+    } = config;
 
     mkdirSync(targetDir, { recursive: true });
 
