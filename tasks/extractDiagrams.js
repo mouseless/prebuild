@@ -24,6 +24,10 @@ export default async function({ source, target, config }) {
     const targetDir = join(target, dir);
     const targetFile = join(target, dir, file);
     const fileName = parse(file).name;
+    /*
+    * These diagram types are taken from the schema in
+    * https://mermaid.js.org/config/schema-docs/config.html
+    */
     const {
       flowchart,
       gantt,
@@ -76,7 +80,7 @@ export default async function({ source, target, config }) {
           block,
           theme: config?.theme || "default",
           themeVariables: config?.themeVariables || []
-         }
+        }
       },
     });
 
