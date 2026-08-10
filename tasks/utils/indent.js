@@ -67,25 +67,23 @@ export default function(content) {
 
   const lines = content.split("\n").map(line => {
     const trimmed = line.trim();
-
-    if (trimmed === "") return "";
+    if (trimmed === "") { return ""; }
 
     const match = trimmed.match(FENCE_REGEX);
-
     if (match) {
       const colonCount = match[1].length;
       const isClosing = match[2].trim() === "";
       const indent = indentFor(colonCount);
 
-      if (isClosing) stack.pop();
-      else stack.push(colonCount);
+      if (isClosing) { stack.pop(); }
+      else { stack.push(colonCount); }
 
       return indent + trimmed;
     }
-
-    if (stack.length === 0) return line;
+    if (stack.length === 0) { return line; }
 
     const enclosingColonCount = stack[stack.length - 1];
+
     return indentFor(enclosingColonCount) + trimmed;
   });
 
@@ -94,5 +92,6 @@ export default function(content) {
 
 function indentFor(colonCount) {
   const level = Math.max(0, colonCount - BASE_COLON_COUNT);
+
   return " ".repeat(level * INDENT_SIZE);
 }
