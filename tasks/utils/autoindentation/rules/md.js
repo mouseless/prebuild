@@ -1,3 +1,51 @@
+/**
+ AI-GEN(Claude AI Sonnet 5)
+ Write a JavaScript function (ES module, default export) that takes a raw
+ markdown string (mdc format) and returns it with corrected indentation,
+ following these rules:
+
+ - A line starting with 2 or more colons (::, :::, ::::, ...) is a component
+   fence (opening or closing). Its indent level is (colonCount - 2) * 2 spaces —
+   so :: = 0 spaces, ::: = 2 spaces, :::: = 4 spaces, and so on.
+ - A line starting with exactly one colon (e.g. :block{content="..."},
+   :include{content="..."}) is a self-closing inline component, not a fence.
+   It should be indented to match whatever fence it's currently nested inside —
+   specifically the nearest (innermost) enclosing fence, even across multiple
+   nesting levels.
+ - Lines that are not inside any fence at all (i.e., before any :: block or
+   fully outside one) must be left completely untouched, exactly as they are.
+ - Blank lines should remain blank — no trailing spaces added.
+ - The function must be idempotent: running it again on
+   already-correctly-formatted output should produce the exact same result.
+ Example input:
+  ::block
+  :::content
+  #test
+
+  Seess
+
+  #mest
+
+  mest
+  :::
+  ::
+
+ Expected output:
+  ::block
+  :::content
+  #test
+
+  Seess
+
+  #mest
+
+  mest
+  :::
+  ::
+  Also handle deeper nesting correctly — e.g. a single-colon component inside a
+  triple-nested fence (::::) should get 4 spaces of indent, matching its
+  innermost enclosing fence, not the outermost one.
+*/
 const BASE_COLON_COUNT = 2; // mdc component fences start at "::"
 const INDENT_SIZE = 2;
 
