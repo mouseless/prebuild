@@ -16,31 +16,7 @@ asyncrounusly runs the tasks with given configurations.
 
 ## Setup
 
-### As a Submodule
-
-To add this as a submodule to your repository and follow folder structure.
-
-```
-prebuild/
-├─ .prebuild => git submodule
-├─ tasks/
-│  ├─ customTask.js
-├─ config.yml
-├─ index.js
-```
-
-> :warning:
->
-> The project requires `YAML` package. Make sure you include this package in
-> your `package.json`.
->
-> ```json
-> "yaml": "^2.2.1"
-> ```
-
-### As an Npm Package
-
-To add this as an npm package to your repository and include below in your package.json
+To add this package to your repository and include below in your `package.json`
 
 ```
   "devDependencies": {
@@ -74,21 +50,8 @@ tasks:
       source: ./
       target: ./.theme/.public
 
-  - extractDiagrams:
-      source: ./
-      target: ./.theme/.temp
-      config:
-        backgroundColor: '#000000'
-        outputFormat: 'svg'
-        deviceScaleFactor: 1
-        theme: base
-        themeVariables:
-          primaryColor: '#FA465B'
-          primaryTextColor: '#fff'
-          primaryBorderColor': '#7C0000'
-          lineColor: '#F8B229'
-          secondaryColor: '#006100'
-          tertiaryColor: '#fff'
+  - indent:
+      source: ./.theme/content
 
   - move:
       extension: .png # optional
@@ -122,11 +85,11 @@ parameters, including subfolders.
 This task (`.theme/prebuild/tasks/copy.js`) copies files with the given
 extension to the desired location.
 
-### Extract Diagrams
+### Indent
 
-This task (`.theme/prebuild/tasks/extractDiagrams.js`) processes markdown files
-and extracts diagrams as `.png` files and modifies markdowns to replace
-markdown code with diagram images.
+This task (`.theme/prebuild/tasks/indent.js`) adjusts the indentation of
+components defined in the `MDC` format in the Markdown files in the target
+directory.
 
 ### Move
 
