@@ -18,7 +18,7 @@ export default async function({ source, find, replace }) {
   log.info(`Renaming '${find}' files to '${replace}' in '${source}'`);
 
   await files(source, extname(find), async (dir, file) => {
-    if(file !== find) return;
+    if(file !== find) { return; }
 
     const sourceFile = join(source, dir, file);
     const replacedFile = join(source, dir, replace);

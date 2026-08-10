@@ -25,7 +25,7 @@ export default async function({ extension, source, oldText, newText }) {
 
     const data = readFileSync(sourceFile, "utf8");
     const match = data.match(regex);
-    if(!match) return;
+    if(!match) { return; }
 
     writeFileSync(sourceFile, data.replaceAll(oldText, newText));
 

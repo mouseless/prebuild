@@ -1,3 +1,4 @@
+export { default as indent } from "./indent.js";
 export { default as clean } from "./clean.js";
 export { default as copy } from "./copy.js";
 export { default as move } from "./move.js";
