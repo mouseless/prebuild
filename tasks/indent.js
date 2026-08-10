@@ -22,7 +22,7 @@ export default async function({ source }) {
     const data = readFileSync(sourceFile, "utf8");
     const formatted = indent(data);
 
-    if (formatted === data) return;
+    if (formatted === data) { return; }
 
     writeFileSync(sourceFile, formatted);
 
