@@ -17,7 +17,6 @@ import rules from "./utils/autoindentation/rules/index.js";
  */
 export default async function({ extension, source }) {
   const rule = rules[extension];
-
   if (!rule) {
     log.warning(`Autoindentation is not supported for '${extension}' files, skipping`);
     return;
@@ -27,7 +26,6 @@ export default async function({ extension, source }) {
 
   await files(source, extension, async (dir, file) => {
     const sourceFile = join(source, dir, file);
-
     const data = readFileSync(sourceFile, "utf8");
     const formatted = rule(data);
 
