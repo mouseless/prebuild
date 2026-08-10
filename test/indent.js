@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import md from "../tasks/utils/autoindentation/rules/md.js";
+import indent from "../tasks/utils/indent.js";
 
 test("indents nested mdc component blocks", () => {
   const input = `
@@ -28,7 +28,7 @@ mest
   :::
 ::`;
 
-  assert.equal(md(input), expected);
+  assert.equal(indent(input), expected);
 });
 
 test("is idempotent", () => {
@@ -39,7 +39,7 @@ test("is idempotent", () => {
   :::
 ::`;
 
-  assert.equal(md(input), input);
+  assert.equal(indent(input), input);
 });
 
 test("handles triple-nested components", () => {
@@ -60,7 +60,7 @@ text
   :::
 ::`;
 
-  assert.equal(md(input), expected);
+  assert.equal(indent(input), expected);
 });
 
 test("leaves content outside any fence untouched", () => {
@@ -72,7 +72,7 @@ Normal paragraph, not touched.
 - list item
   - nested list item`;
 
-  assert.equal(md(input), input);
+  assert.equal(indent(input), input);
 });
 
 test("empty lines inside a fence stay empty (no trailing indent)", () => {
@@ -83,7 +83,7 @@ text
 :::
 ::`;
 
-  const result = md(input);
+  const result = indent(input);
   const blankLine = result.split("\n")[3];
 
   assert.equal(blankLine, "");

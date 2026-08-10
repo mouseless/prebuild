@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import log from "./utils/log.js";
 import files from "./utils/files.js";
-import rules from "./utils/autoindentation/rules/index.js";
+import indent from "./utils/indent.js";
 
 /**
  * Fixes indentation of files with given extension in source directory,
@@ -10,24 +10,17 @@ import rules from "./utils/autoindentation/rules/index.js";
  *
  * @async
  * @param {Object} parameters Task parameters
- * @param {String} parameters.extension Extension of files to search (e.g. ".md")
  * @param {String} parameters.source Source directory to search from
  *
  * @returns {Promise}
  */
-export default async function({ extension, source }) {
-  const rule = rules[extension];
-  if (!rule) {
-    log.warning(`Autoindentation is not supported for '${extension}' files, skipping`);
-    return;
-  }
+export default async function({ source }) {
+  log.info(`Fixing indentation of .md files in '${source}'`);
 
-  log.info(`Fixing indentation of '${extension}' files in '${source}'`);
-
-  await files(source, extension, async (dir, file) => {
+  await files(source, '.md', async (dir, file) => {
     const sourceFile = join(source, dir, file);
     const data = readFileSync(sourceFile, "utf8");
-    const formatted = rule(data);
+    const formatted = indent(data);
 
     if (formatted === data) return;
 
